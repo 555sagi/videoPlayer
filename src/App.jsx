@@ -7,6 +7,7 @@ function PortraitVideoPlayer() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isPortrait, setIsPortrait] = useState(true)
   const [current, setCurrent] = useState('0:00')
+  const [showHint, setShowHint] = useState(true)
 
   useEffect(() => {
     const video = videoRef.current
@@ -21,11 +22,16 @@ function PortraitVideoPlayer() {
 
     const onEnded = () => setIsPlaying(false)
 
+    const onPlay = () => setShowHint(false)
+
     video.addEventListener('timeupdate', onTimeUpdate)
     video.addEventListener('ended', onEnded)
+    video.addEventListener('play', onPlay)
+
     return () => {
       video.removeEventListener('timeupdate', onTimeUpdate)
       video.removeEventListener('ended', onEnded)
+      video.removeEventListener('play', onPlay)
     }
   }, [])
 
@@ -51,6 +57,11 @@ function PortraitVideoPlayer() {
     <section className={`portrait-player ${isPortrait ? 'portrait' : 'landscape'}`}>
       <h2>Portrait Video Player</h2>
       <div className="video-frame">
+        {showHint && (
+          <div className="play-hint" role="status" aria-live="polite">
+            Click to play
+          </div>
+        )}
         <video
           ref={videoRef}
           playsInline
