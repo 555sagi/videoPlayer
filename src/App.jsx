@@ -67,7 +67,7 @@ function PortraitVideoPlayer() {
           playsInline
           poster="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.jpg"
         >
-          <source src="/video/sister-wishes.mp4" type="video/mp4" />
+          <source src="/video/sam-sister.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
